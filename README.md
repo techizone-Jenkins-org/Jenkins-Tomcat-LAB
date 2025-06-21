@@ -17,8 +17,8 @@ sudo useradd -g tomcat -d /opt/tomcat -s /bin/false tomcat
 #### Download and Install Tomcat
 ```
 cd /tmp
-wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.95/bin/apache-tomcat-9.0.95.tar.gz
-sudo tar -xvf apache-tomcat-9.0.95.tar.gz -C /opt/tomcat --strip-components=1
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.106/bin/apache-tomcat-9.0.106.tar.gz
+sudo tar -xvf apache-tomcat-9.0.106.tar.gz -C /opt/tomcat --strip-components=1
 ```
 #### Configure Permissions
 ```
@@ -66,9 +66,40 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable tomcat
 sudo systemctl start tomcat
+```
 
+# Tomcat Configuration
+
+#### Manage Users & Roles in Tomcat
+
+sudo vim /opt/tomcat/conf/tomcat-users.xml
+Add  these configuration within the <tomcat-users> and </tomcat-users> tags
 
 ```
+<role rolename="admin"/>
+<role rolename="admin-gui"/>
+<role rolename="admin-script"/>
+<role rolename="manager"/>
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+
+<user username="Your-username-HERE" password="Your-Password-HERE"  roles="admin,manager,admin-gui,admin-script,manager-gui,manager-script,manager-jmx,manager-status" />
+
+```
+
+#### Need to Access Tomcat Server Form Anywhere or from Any IP-Address
+
+sudo vim /opt/tomcat/webapps/manager/META-INF/context.xml
+Edit that Line Like These
+```
+allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1 |.*" />
+
+```
+
+
+
 
 
 
