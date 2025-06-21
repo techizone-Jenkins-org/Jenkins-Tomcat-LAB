@@ -34,8 +34,8 @@ sudo chmod +x shutdown.sh
 ```
 
 #### Create Service File
-sudo vi /etc/systemd/system/tomcat.service
-Add these Lines
+**sudo vi /etc/systemd/system/tomcat.service**
+
 ```
 [Unit]
 Description=Apache Tomcat Web Application Container
@@ -72,7 +72,9 @@ sudo systemctl start tomcat
 
 #### Manage Users & Roles in Tomcat
 
-sudo vim /opt/tomcat/conf/tomcat-users.xml
+**sudo vim /opt/tomcat/conf/tomcat-users.xml**
+
+
 Add  these configuration within the <tomcat-users> and </tomcat-users> tags
 
 ```
@@ -91,8 +93,10 @@ Add  these configuration within the <tomcat-users> and </tomcat-users> tags
 
 #### Need to Access Tomcat Server Form Anywhere or from Any IP-Address
 
-sudo vim /opt/tomcat/webapps/manager/META-INF/context.xml
-Edit that Line Like These
+**sudo vim /opt/tomcat/webapps/manager/META-INF/context.xml**
+
+
+Edit that Line Like These We need to add ".*" at the end
 ```
 allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1 |.*" />
 
